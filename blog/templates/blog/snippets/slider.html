@@ -1,0 +1,21 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static "blog/styles.css" %}">
+
+<div class="container-slider">
+	<div class="horizontal-scroll">
+		<button onclick="csrollHorizontally(1)" class="btn-scroll" id="btn-scroll-left"><i class="fas fa-angle-double-left"></i></button>
+
+		<button onclick="csrollHorizontally(-1)" class="btn-scroll " id="btn-scroll-right"><i class="fas fa-angle-double-right"></i></button>
+
+		<div class="story-container">
+			{% for category in categories %}
+				<div class="story-circle"><img src="{{ category.category_image.url }}" alt="" srcset="">
+					<div class="story-text">
+						<p>{{ category.name }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

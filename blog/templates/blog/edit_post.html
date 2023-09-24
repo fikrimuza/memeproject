@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" type="text/css" href="{% static "blog/main.css" %}">
+
+
+{% block page_title %}
+	{{judul}}
+{% endblock page_title %}
+
+{% block contents %}
+	<header>
+		{% include "blog/snippets/navbar.html" %}
+	</header>
+
+	<main>
+		<div class="container justify-content-center">
+			<div class="card bg-white">
+				<div class="card-header align-self-center justify-content-center bg-white">
+					<h3>Edit Post</h3>
+				</div>
+				
+				<div class="card-body">
+					<div class="container">
+						<form class="" action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							{{ form | crispy }}
+							<div class="d-grid gap-2">
+								<button class="btn btn-primary" type="submit">Save Edit</button>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</main>
+{% endblock contents %}

@@ -1,0 +1,35 @@
+/* ##### NAVBAR ##### */
+.profile-img-nav {
+	height: 40px;
+	width: 40px;
+}
+
+.list {
+	list-style: none;
+	margin: 6px;
+}
+
+.btn-login {
+	background-color: #5fde40;
+	padding: 6px;
+	width: 135px;
+	text-align: center;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 30px;
+}
+
+.btn-signup {
+	background-color: #e5e5e5;
+	padding: 6px;
+	width: 135px;
+	text-align: center;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 30px;
+	color: #644f4f;
+}

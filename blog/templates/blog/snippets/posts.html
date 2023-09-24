@@ -1,0 +1,141 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" type="text/css" href="{% static "blog/main.css" %}">
+
+
+{% for post in posts %}
+	<div class="container d-flex justify-content-center">
+		<div class="card">
+			<div class="card-header">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="d-flex">
+								<img class="rounded-circle img-thumbnail img-post" src="{{ post.users.profile_pic.url }}">
+								<div class="container-fluid">
+									<p class="fs-5"> {{post.users.name}} </p>
+									<p>Published On: {{post.upload}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr class="divider">
+			</div>
+
+			<div class="card-body">
+				<h5 class="card-text lead">{{ post.caption }}</h5>
+				<img class="card-img-top" src="{{ post.meme_photo.url }}", alt="mem-photo">
+				<hr class="divider">
+				<div class="container d-flex justify-content-center align-self-center">
+					<div class="row">
+						<ul style="list-style:none">
+							<li>
+								<button class="btn btn-outline-dark">
+									<span class="button-icons">
+										<ion-icon name="thumbs-up-outline"></ion-icon>
+									</span>
+									<span>130</span>
+								</button>
+
+								<button class="btn btn-outline-dark">
+									<span class="button-icons">
+										<ion-icon name="thumbs-down-outline"><ion-icon>
+									</span>
+									<span>130</span>
+								</button>
+
+								<button onclick="displayComment({{post.id}})" class="btn btn-outline-dark">
+									<span class="button-icons">
+										<ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+									</span>
+									<span>130</span>
+								</button>
+
+								<button class="btn btn-outline-dark">
+									<span class="button-icons">
+										<ion-icon name="share-social-outline"><ion-icon>
+									</span>
+									<span>130</span>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- ##### COMMENT SECTION ##### -->
+				{% if user.is_authenticated %}
+					<div style="none" class="container" id="{{post.id}}">
+						<div class="d-flex flex-row">
+							<div class="col2 col-sm-2 col-md-1">
+								<div class="d-flex">
+									<div class="justify-content-center align-self-center">
+										<img class="rounded-circle img-post" src="{{ request.user.profile_pic.url }}">
+									</div>
+								</div>
+							</div>
+
+							<div class="p-2">
+								<div class="row">
+									<div class="container">
+										<div class="input-group mb-3 d-flex">
+											<form action="" method="post">
+												{% csrf_token %}
+												{{comment_form.comment | as_crispy_field}}
+												<input type="hidden" name="photos_id" value="{{post.id}}" placeholder="Create a comment">
+												<button type="submit" class="btn btn-sm btn-info">Add Comment</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="d-flex flex-row">
+						<div class="col-2 col-sm-2 col-md-1"></div>
+							<div class="d-flex">
+								<div class="justify-content-center align-self-center">
+									<img src="{{ post.users.profile_pic.url }}" class="rounded-circle img-post">
+								</div>
+							</div>
+						</div>
+						<div class="reply-box p-2">
+							<div class="row">
+								<p class="mb-1">{{ post.users.name }}</p>
+							</div>
+
+							<div class="row">
+								<p>{{ post.comments.comment }}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<ul class="replies-ul">
+							<li class="reply-btn">
+								<button class="btn">reply</button>
+								<button class="btn">shere</button>
+							</li>
+						</ul>
+
+						<div class="row" id="reply-form">
+							<div class="col d-flex">
+								<img src="">
+								<div class="input-group mb-3 ms-2">
+									<input class="form-control" type="" name="">
+									<button class="btn btn-outline-secondery">
+										<span>
+											<ion-icon name="share-social-outline"><ion-icon>
+										</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}

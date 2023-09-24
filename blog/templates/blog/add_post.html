@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" type="text/css" href="{% static "blog/main.css" %}">
+
+
+{% block page_title %}
+	{{judul}}
+{% endblock page_title %}
+
+{% block contents %}
+	<header>
+		{% include "blog/snippets/navbar.html" %}
+	</header>
+
+	<main>
+		{% if user.is_authenticated %}
+			<div class="container d-flex justify-content-center">
+				<div class="card bg-white">
+					<div class="align-self-center card-header justify-content-center">
+						<h3>Add New Post</h3>
+					</div>
+
+					<div class="card-body">
+						<div class="container">
+							<form action="" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							{{ form | crispy }}
+								<button type="submit" class="btn btn-sm btn-info text-white">Send</button>
+								<a href="{% url 'category' %}" class="btn btn-sm btn-danger">Add Category</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</main>
+{% endblock contents %}
+
+
+

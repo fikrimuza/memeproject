@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	{{judul}}
+{% endblock page_title %}
+
+{% block contents %}
+	<header>
+		{% include "blog/snippets/navbar.html" %}
+		{% include "blog/snippets/slider.html" %}
+	</header>
+
+	<main>
+		{% include "blog/snippets/posts.html" %}
+	</main>
+{% endblock contents %}

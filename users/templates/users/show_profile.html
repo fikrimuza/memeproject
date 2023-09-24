@@ -1,0 +1,73 @@
+{% extends "users/index.html" %}
+{% load static %}
+
+
+{% block title %}
+	
+{% endblock title %}
+
+{% block contents %}
+	<link rel="stylesheet" type="text/css" href="{% static "users/show-profile.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "users/posts.css" %}">
+
+	<!-- navbar Section -->
+	{% include "blog/snippets/navbar.html" %}
+	<!-- end navbar Section -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<div class="row my-2">
+					<div class="col-2 d-flex header-img">
+						<img src="{{ user.profile_pic.url }}" class="rounded-circle">
+					</div>
+
+					<div class="col">
+						<p class="fs-2 mb-0">{{ user.name }}</p>
+						<p>@{{ user.name }}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col d-none">
+				
+			</div>
+
+			<div class="col-6 d-flex align-items-center justify-content-end">
+				<div>
+					<a href="{% url 'edit_profile' user.id %}"><button type="button" class="btn btn-edit rounded-pill">Edit Profile</button></a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- tab Start -->
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+			</li>
+
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">Category</button>
+			</li>
+
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="commented-tab" data-bs-toggle="tab" data-bs-target="#commented" type="button" role="tab" aria-controls="commented" aria-selected="true">commented</button>
+			</li>
+		</ul>
+
+		<!-- TAB CONTENT -->
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="home">
+				{% include "users/snippets/status.html" %}
+			</div>
+		</div>
+
+		<div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+			{% include "blog/snippets/categories.html" %}
+		</div>
+
+		<div class="tab-pane fade show active" id="commented" role="tabpanel" aria-labelledby="commented-tab">Content Commented
+		</div>
+		<!-- tab End -->
+	</div>
+{% endblock contents %}
